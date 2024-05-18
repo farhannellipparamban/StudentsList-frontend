@@ -305,3 +305,98 @@ const Sidebar: React.FC = () => {
 };
 
 export default Sidebar;
+
+
+// <div>
+    //   {showModal ? (
+    //     <div className="fixed inset-0 z-50 overflow-auto bg-black bg-opacity-50 flex justify-center items-center">
+    //       <div className="bg-white rounded-lg p-4 sm:p-6 w-full max-w-lg mx-4 sm:mx-auto">
+    //         <h2 className="text-lg sm:text-xl font-semibold mb-4">
+    //           Add New Student
+    //         </h2>
+    //         <form onSubmit={handleSubmit}>
+    //           <div className="mb-4">
+    //             <input
+    //               type="text"
+    //               id="name"
+    //               name="name"
+    //               placeholder="Name"
+    //               value={newStudent.name}
+    //               onChange={handleInputChange}
+    //               className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+    //               required
+    //             />
+    //           </div>
+    //           <div className="mb-4">
+    //             <input
+    //               type="email"
+    //               id="email"
+    //               name="email"
+    //               placeholder="Email"
+    //               value={newStudent.email}
+    //               onChange={handleInputChange}
+    //               className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+    //               required
+    //             />
+    //           </div>
+    //           <div className="mb-4">
+    //             <input
+    //               type="number"
+    //               id="mobile"
+    //               name="mobile"
+    //               placeholder="Phone"
+    //               value={newStudent.mobile}
+    //               onChange={handleInputChange}
+    //               className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+    //               required
+    //             />
+    //           </div>
+    //           <div className="mb-4">
+    //             <input
+    //               type="number"
+    //               id="enrollNo"
+    //               name="enrollNo"
+    //               placeholder="Enroll Number"
+    //               value={newStudent.enrollNo}
+    //               onChange={handleInputChange}
+    //               className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+    //               required
+    //             />
+    //           </div>
+    //           <div className="relative mb-4">
+    //             {/* <label htmlFor="doAdmission" className="text-gray-700">
+    //               Date of Admission
+    //             </label> */}
+    //             <input
+    //               type="date"
+    //               id="doAdmission"
+    //               name="doAdmission"
+    //               value={newStudent.doAdmission}
+    //               onChange={handleInputChange}
+    //               className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-transparent"
+    //               required
+    //             />
+    //           </div>
+
+    //           <div className="flex justify-center">
+    //             <button
+    //               type="submit"
+    //               className="px-36 py-2 bg-green-500 text-white rounded-md hover:bg-green-600"
+    //             >
+    //               Submit
+    //             </button>
+    //           </div>
+    //           <div className="flex justify-center mt-4 ">
+    //             <button
+    //               type="button"
+    //               className="px-36 py-2 bg-orange-600 text-white rounded-md hover:bg-orange-700"
+    //               onClick={() => setShowModal(false)}
+    //             >
+    //               Cancel
+    //             </button>
+    //           </div>
+    //         </form>
+    //       </div>
+    //     </div>
+    //   ) : null}
+    // </div>

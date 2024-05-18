@@ -55,103 +55,129 @@ const AddStudent: React.FC<AddStudentProps> = ({
   };
 
   return (
-    <div>
-      {showModal ? (
-        <div className="fixed inset-0 z-50 overflow-auto bg-black bg-opacity-50 flex justify-center items-center">
-          <div className="bg-white rounded-lg p-6 max-w-md mx-auto">
-            <h2 className="text-2xl font-bold mb-4">Add New Student</h2>
-            <form onSubmit={handleSubmit}>
-              <div className="mb-4">
-                <label htmlFor="name" className="block font-medium mb-2">
-                  Name
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={newStudent.name}
-                  onChange={handleInputChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  required
-                />
-              </div>
-              <div className="mb-4">
-                <label htmlFor="email" className="block font-medium mb-2">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={newStudent.email}
-                  onChange={handleInputChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  required
-                />
-              </div>
-              <div className="mb-4">
-                <label htmlFor="mobile" className="block font-medium mb-2">
-                  Phone
-                </label>
-                <input
-                  type="number"
-                  id="mobile"
-                  name="mobile"
-                  value={newStudent.mobile}
-                  onChange={handleInputChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  required
-                />
-              </div>
-              <div className="mb-4">
-                <label htmlFor="enrollNo" className="block font-medium mb-2">
-                  Enroll No
-                </label>
-                <input
-                  type="number"
-                  id="enrollNo"
-                  name="enrollNo"
-                  value={newStudent.enrollNo}
-                  onChange={handleInputChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  required
-                />
-              </div>
-              <div className="mb-4">
-                <label htmlFor="doAdmission" className="block font-medium mb-2">
-                  Date of Admission
-                </label>
-                <input
-                  type="date"
-                  id="doAdmission"
-                  name="doAdmission"
-                  value={newStudent.doAdmission}
-                  onChange={handleInputChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  required
-                />
-              </div>
+    <>
+      {showModal && (
+        <div className="fixed z-10 inset-0 overflow-y-auto">
+          <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <div
+              className="fixed inset-0 transition-opacity"
+              aria-hidden="true"
+            >
+              <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
+            </div>
 
-              <div className="flex justify-end">
-                <button
-                  type="button"
-                  className="px-4 py-2 bg-gray-300 text-gray-700 rounded mr-2 hover:bg-gray-400"
-                  onClick={() => setShowModal(false)}
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-                >
-                  Add Student
-                </button>
-              </div>
-            </form>
+            <span
+              className="hidden sm:inline-block sm:align-middle sm:h-screen"
+              aria-hidden="true"
+            >
+              &#8203;
+            </span>
+
+            <div
+              className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-sm sm:w-full"
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="modal-headline"
+            >
+              <form onSubmit={handleSubmit}>
+                <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                  <div className="sm:flex sm:items-start p-5">
+                    <div className="-mt-3 text-center sm:text-left w-full">
+                      <h3
+                        className="text-lg leading-6 font-medium text-gray-900 mb-5"
+                        id="modal-headline"
+                      >
+                        Add New Student
+                      </h3>
+                      <div className="mt-2">
+                        <div className="mb-4">
+                          <input
+                            type="name"
+                            id="name"
+                            name="name"
+                            placeholder="Name"
+                            value={newStudent.name}
+                            onChange={handleInputChange}
+                            className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            required
+                          />
+                        </div>
+                        <div className="mb-4">
+                          <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="Email"
+                            value={newStudent.email}
+                            onChange={handleInputChange}
+                            className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            required
+                          />
+                        </div>
+                        <div className="mb-4">
+                          <input
+                            type="number"
+                            id="mobile"
+                            name="mobile"
+                            placeholder="Phone"
+                            value={newStudent.mobile}
+                            onChange={handleInputChange}
+                            className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            required
+                          />
+                        </div>
+                        <div className="mb-4">
+                          <input
+                            type="number"
+                            id="enrollNo"
+                            name="enrollNo"
+                            placeholder="Enroll Number"
+                            value={newStudent.enrollNo}
+                            onChange={handleInputChange}
+                            className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            required
+                          />
+                        </div>
+                        <div className="-mb-3">
+                          <input
+                            type="date"
+                            id="doAdmission"
+                            name="doAdmission"
+                            placeholder="Date of Admission"
+                            value={newStudent.doAdmission}
+                            onChange={handleInputChange}
+                            className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            required
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex justify-center">
+                  <button
+                    type="submit"
+                    className="px-24 py-2 bg-green-500 text-white rounded-md hover:bg-green-600"
+                  >
+                    Submit
+                  </button>
+                </div>
+                <div className="flex justify-center mt-4 mb-12">
+                  <button
+                    type="button"
+                    className="px-24 py-2 bg-orange-700 text-white rounded-md hover:bg-orange-800"
+                    onClick={() => setShowModal(false)}
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
-      ) : null}
-    </div>
+      )}
+    </>
   );
 };
 

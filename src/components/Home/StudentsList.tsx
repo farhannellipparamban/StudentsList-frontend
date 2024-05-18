@@ -68,7 +68,7 @@ const StudenstList: React.FC = () => {
   }
 
   return (
-    <div className="container mx-auto px-1 sm:px-2">
+    <div className="container mx-auto px-1 sm:px-3">
       <div className="flex flex-col sm:flex-row justify-between items-center my-3">
         <h1 className="font-bold text-3xl mb-3 sm:mb-0">Students</h1>
         <div className="flex flex-col sm:flex-row items-center space-x-0 sm:space-x-5">
@@ -82,9 +82,11 @@ const StudenstList: React.FC = () => {
               setEditStudent(null);
               setShowModal(true);
             }}
-            className="px-3 py-4 bg-green-500 text-white font-semibold rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400 flex items-center space-x-2 w-full sm:w-auto"
-          >
-            <span className="sm:hidden">Add</span>
+            className="px-3 py-2 sm:py-4 bg-green-500 text-white font-semibold rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400 flex items-center justify-center space-x-2 w-full sm:w-auto"
+            >
+            <div className="flex sm:hidden justify-center items-center w-full">
+              <span>Add</span>
+            </div>{" "}
             <span className="hidden sm:inline">ADD NEW STUDENT</span>
           </button>
           {showModal &&
@@ -117,37 +119,37 @@ const StudenstList: React.FC = () => {
                     <tr>
                       <th
                         scope="col"
-                        className="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider sm:px-6"
+                        className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider sm:px-6"
                       >
                         NAME
                       </th>
                       <th
                         scope="col"
-                        className="hidden px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider sm:table-cell sm:px-6"
+                        className="hidden px-1 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider sm:table-cell sm:px-6"
                       >
                         EMAIL
                       </th>
                       <th
                         scope="col"
-                        className="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider sm:px-6"
+                        className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider sm:px-6"
                       >
                         PHONE
                       </th>
                       <th
                         scope="col"
-                        className="hidden px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider md:table-cell md:px-6"
+                        className="hidden px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider md:table-cell md:px-6"
                       >
                         ENROLL NUMBER
                       </th>
                       <th
                         scope="col"
-                        className="hidden px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider lg:table-cell lg:px-6"
+                        className="hidden px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider lg:table-cell lg:px-6"
                       >
                         DATE OF ADMISSION
                       </th>
                       <th
                         scope="col"
-                        className="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider sm:px-6"
+                        className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider sm:px-6"
                       ></th>
                     </tr>
                   </thead>
@@ -160,7 +162,7 @@ const StudenstList: React.FC = () => {
                           key={student._id}
                           className="hover:bg-gray-100 transition-colors"
                         >
-                          <td className="px-2 py-4 whitespace-nowrap sm:px-6">
+                          <td className="px-1 py-4 whitespace-nowrap sm:px-6">
                             <div className="flex items-center text-sm text-black">
                               <img
                                 src="/download (1).png"
@@ -172,22 +174,22 @@ const StudenstList: React.FC = () => {
                               </span>
                             </div>
                           </td>
-                          <td className="hidden px-2 py-4 whitespace-nowrap sm:table-cell">
+                          <td className="hidden px-4 py-4 whitespace-nowrap sm:table-cell">
                             <div className="text-sm text-black">
                               {student.email}
                             </div>
                           </td>
-                          <td className="px-2 py-4 whitespace-nowrap sm:px-6">
+                          <td className="px-2 py-6 whitespace-nowrap sm:px-6">
                             <span className="text-sm text-black">
                               {student.mobile}
                             </span>
                           </td>
-                          <td className="hidden px-2 py-4 whitespace-nowrap md:table-cell">
+                          <td className="hidden px-8 py-4 whitespace-nowrap md:table-cell">
                             <span className="text-sm text-black">
                               {student.enrollNo}
                             </span>
                           </td>
-                          <td className="hidden px-2 py-4 whitespace-nowrap lg:table-cell">
+                          <td className="hidden px-8 py-4 whitespace-nowrap lg:table-cell">
                             <span className="text-sm text-black">
                               {formatDate(student.doAdmission as string)}
                             </span>

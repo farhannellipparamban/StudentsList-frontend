@@ -73,9 +73,9 @@ const EditStudent: React.FC<EditStudentProps> = ({
               <form onSubmit={handleSubmit}>
                 <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                   <div className="sm:flex sm:items-start p-5">
-                    <div className="mt-3 text-center sm:text-left w-full">
+                    <div className="-mt-3 text-center sm:text-left w-full">
                       <h3
-                        className="text-lg leading-6 font-medium text-gray-900"
+                        className="text-lg leading-6 font-medium text-gray-900 mb-5"
                         id="modal-headline"
                       >
                         Edit Student
@@ -129,7 +129,7 @@ const EditStudent: React.FC<EditStudentProps> = ({
                             required
                           />
                         </div>
-                        <div className="mb-4">
+                        <div className="-mb-3">
                           <input
                             type="date"
                             id="doAdmission"
@@ -146,17 +146,19 @@ const EditStudent: React.FC<EditStudentProps> = ({
                   </div>
                 </div>
 
-                <div className="flex justify-between px-4 py-3 sm:px-6">
+                <div className="flex justify-center">
                   <button
                     type="submit"
-                    className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-3 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    className="px-24 py-2 bg-green-500 text-white rounded-md hover:bg-green-600"
                   >
                     Update
                   </button>
+                </div>
+                <div className="flex justify-center mt-4 mb-12">
                   <button
                     type="button"
+                    className="px-24 py-2 bg-orange-700 text-white rounded-md hover:bg-orange-800"
                     onClick={() => setShowModal(false)}
-                    className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-3 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                   >
                     Cancel
                   </button>
