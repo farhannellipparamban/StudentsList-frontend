@@ -4,6 +4,7 @@ import { faEdit, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { addStudent, deleteStudent, getAllStudents } from "../../api/adminApi";
 import AddStudent from "./AddStudent";
 import EditStudent from "./EditStudents";
+import Pagination from "../Common/Pagination";
 
 interface Student {
   _id?: string;
@@ -14,9 +15,11 @@ interface Student {
   doAdmission?: string;
 }
 
-const StudenstList: React.FC = () => {
+const StudentsList: React.FC = () => {
   const [studentList, setStudentList] = useState<Student[]>([]);
   const [showModal, setShowModal] = useState(false);
+  const [searchInput, setSearchInput] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
   const [editStudent, setEditStudent] = useState<Student | null>(null);
   const [newStudent, setNewStudent] = useState<Student>({
     name: "",
@@ -25,6 +28,12 @@ const StudenstList: React.FC = () => {
     enrollNo: "",
     doAdmission: "",
   });
+  const [deleteConfirmation, setDeleteConfirmation] = useState<{
+    show: boolean;
+    studentId?: string;
+  }>({ show: false });
+
+  const dataPerPage = 5;
 
   const getStudents = async () => {
     try {
@@ -36,6 +45,7 @@ const StudenstList: React.FC = () => {
         setStudentList([]);
       }
     } catch (error) {
+      
       console.log(error);
     }
   };
@@ -59,12 +69,34 @@ const StudenstList: React.FC = () => {
       console.error("Error deleting student:", error);
     }
   };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchInput(e.target.value);
+    setCurrentPage(1);
+  };
+
   function formatDate(dateString: string): string {
     const date = new Date(dateString);
     const options = { day: "2-digit", month: "short", year: "numeric" };
     const formattedDate = (date as any).toLocaleDateString("en-US", options);
     const [month, day, Year] = formattedDate.split(" ");
     return `${day.replace(",", "")}-${month}, ${Year}`;
+  }
+
+  const filteredData = !searchInput
+    ? studentList
+    : studentList.filter((student) =>
+        student.name?.toLowerCase().includes(searchInput.toLowerCase())
+      );
+
+  const lastIndex = currentPage * dataPerPage;
+  const firstIndex = lastIndex - dataPerPage;
+  const studentListInSinglePage = filteredData.slice(firstIndex, lastIndex);
+  const totalPages = Math.ceil(filteredData.length / dataPerPage);
+
+  const numbers = [];
+  for (let i = 1; i <= totalPages; i++) {
+    numbers.push(i);
   }
 
   return (
@@ -74,6 +106,8 @@ const StudenstList: React.FC = () => {
         <div className="flex flex-col sm:flex-row items-center space-x-0 sm:space-x-5">
           <input
             type="text"
+            value={searchInput}
+            onChange={handleInputChange}
             placeholder="Search..."
             className="px-3 py-2 pr-28 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200 ease-in-out transform hover:scale-105 placeholder-gray-500 mb-3 sm:mb-0 w-full sm:w-auto"
           />
@@ -83,7 +117,7 @@ const StudenstList: React.FC = () => {
               setShowModal(true);
             }}
             className="px-3 py-2 sm:py-4 bg-green-500 text-white font-semibold rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400 flex items-center justify-center space-x-2 w-full sm:w-auto"
-            >
+          >
             <div className="flex sm:hidden justify-center items-center w-full">
               <span>Add</span>
             </div>{" "}
@@ -154,10 +188,9 @@ const StudenstList: React.FC = () => {
                     </tr>
                   </thead>
                   <tbody className="bg-white divide-y divide-gray-200">
-                    {studentList &&
-                    Array.isArray(studentList) &&
-                    studentList.length > 0 ? (
-                      studentList.map((student) => (
+                    {studentListInSinglePage &&
+                      studentListInSinglePage.length > 0 &&
+                      studentListInSinglePage.map((student) => (
                         <tr
                           key={student._id}
                           className="hover:bg-gray-100 transition-colors"
@@ -203,29 +236,70 @@ const StudenstList: React.FC = () => {
                               />
                               <FontAwesomeIcon
                                 icon={faTrashAlt}
-                                onClick={() => handleDelete(student._id!)}
+                                onClick={() =>
+                                  setDeleteConfirmation({
+                                    show: true,
+                                    studentId: student._id,
+                                  })
+                                }
                                 className="text-red-500 cursor-pointer"
                               />
                             </div>
                           </td>
                         </tr>
-                      ))
-                    ) : (
-                      <tr>
-                        <td colSpan={6} className="px-6 py-4 text-center">
-                          No students found
-                        </td>
-                      </tr>
-                    )}
+                      ))}
                   </tbody>
                 </table>
+
+                {deleteConfirmation.show && (
+                  <div className="fixed inset-0 p-4 flex flex-wrap justify-center items-center w-full h-full z-[1000] before:fixed before:inset-0 before:w-full before:h-full before:bg-[rgba(0,0,0,0.5)] overflow-auto font-[sans-serif]">
+                    <div className="w-full max-w-lg bg-white shadow-lg rounded-md p-6 relative">
+                      <div className="my-8 text-center">
+                        <h4 className="text-lg font-semibold mt-6">
+                          Are you sure you want to delete student{" "}
+                          {
+                            studentList.find(
+                              (student) =>
+                                student._id === deleteConfirmation.studentId
+                            )?.name
+                          }{" "}
+                          ?
+                        </h4>
+                      </div>
+                      <div className="text-center space-x-4 space-y-3">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            handleDelete(deleteConfirmation.studentId!);
+                            setDeleteConfirmation({ show: false });
+                          }}
+                          className="px-16 py-2.5 rounded-md text-white text-sm font-semibold border-none outline-none bg-green-500 hover:bg-green-700 active:bg-green-500"
+                        >
+                          Yes
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => setDeleteConfirmation({ show: false })}
+                          className="px-16 py-2.5 rounded-md text-white text-sm font-semibold border-none outline-none bg-orange-700 hover:bg-orange-800 active:bg-orange-700"
+                        >
+                          No
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>
         </div>
       </div>
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={setCurrentPage}
+      />
     </div>
   );
 };
 
-export default StudenstList;
+export default StudentsList;
