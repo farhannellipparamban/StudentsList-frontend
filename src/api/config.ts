@@ -1,7 +1,7 @@
 import axios, { AxiosError, AxiosInstance } from "axios";
 
 // The base URL for the API endpoints.
-const BASE_URL = import.meta.env.BASE_URL;
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 const axiosAuthorized: AxiosInstance = axios.create({
   baseURL: BASE_URL,
