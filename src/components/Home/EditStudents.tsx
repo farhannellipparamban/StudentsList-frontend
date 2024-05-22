@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { updateStudent } from "../../api/adminApi";
+import { toast } from "react-toastify";
 
 interface EditStudentProps {
   showModal: boolean;
@@ -37,11 +38,13 @@ const EditStudent: React.FC<EditStudentProps> = ({
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      await updateStudent(editStudent._id as string, editStudent);
+      const {message}=await updateStudent(editStudent._id as string, editStudent);
       updateStudentList();
+      toast.success(message);
       setShowModal(false);
     } catch (error) {
-      console.error("Failed to update student:", error);
+      console.error("Error updating student:", error);
+      toast.error("Failed to update student. Please try again later.");
     }
   };
 

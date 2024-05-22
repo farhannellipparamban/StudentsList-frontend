@@ -9,6 +9,7 @@ interface Student {
   doAdmission?: string;
 }
 
+// Fetches all students from the server.
 const getAllStudents = async () => {
   try {
     const response = await axiosAuthorized.get("/allStudents");
@@ -18,6 +19,7 @@ const getAllStudents = async () => {
   }
 };
 
+// Adds a new student.
 const addStudent = async (student: Student) => {
   try {
     const response = await axiosAuthorized.post("/addStudent", student);
@@ -27,6 +29,7 @@ const addStudent = async (student: Student) => {
   }
 };
 
+// Updates an existing student.
 const updateStudent = async (id: string, student: Student) => {
   try {
     const response = await axiosAuthorized.put(`/editStudent/${id}`, student);
@@ -36,6 +39,7 @@ const updateStudent = async (id: string, student: Student) => {
   }
 };
 
+// Deletes an existing student.
 const deleteStudent = async (id: string) => {
   try {
     const response = await axiosAuthorized.delete(`/deleteStudent/${id}`);

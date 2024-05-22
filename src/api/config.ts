@@ -1,11 +1,13 @@
 import axios, { AxiosError, AxiosInstance } from "axios";
 
-const BASE_URL = "http://localhost:4000";
+// The base URL for the API endpoints.
+const BASE_URL = import.meta.env.BASE_URL;
 
 const axiosAuthorized: AxiosInstance = axios.create({
   baseURL: BASE_URL,
 });
 
+// request interceptor .
 axiosAuthorized.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("token");
@@ -20,6 +22,7 @@ axiosAuthorized.interceptors.request.use(
   }
 );
 
+//response interceptor .
 axiosAuthorized.interceptors.response.use(
   (response) => response,
   (error: AxiosError) => {

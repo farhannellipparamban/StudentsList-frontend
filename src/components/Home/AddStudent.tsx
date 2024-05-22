@@ -1,4 +1,5 @@
 import React from "react";
+import { toast } from "react-toastify";
 interface Student {
   _id?: string;
   name?: string;
@@ -34,10 +35,11 @@ const AddStudent: React.FC<AddStudentProps> = ({
     }));
   };
 
+ 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      await addStudent(newStudent);
+      const { message } = await addStudent(newStudent);
       setShowModal(false);
       setNewStudent({
         name: "",
@@ -46,11 +48,11 @@ const AddStudent: React.FC<AddStudentProps> = ({
         enrollNo: "",
         doAdmission: "",
       });
-      console.log("Updating student list...");
-
       await updateStudentList();
+      toast.success(message);
     } catch (error) {
       console.error("Error adding student:", error);
+      toast.error("Failed to add student. Please try again later.");
     }
   };
 

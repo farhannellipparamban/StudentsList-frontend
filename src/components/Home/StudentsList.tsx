@@ -5,6 +5,7 @@ import { addStudent, deleteStudent, getAllStudents } from "../../api/adminApi";
 import AddStudent from "./AddStudent";
 import EditStudent from "./EditStudents";
 import Pagination from "../Common/Pagination";
+import { toast } from "react-toastify";
 
 interface Student {
   _id?: string;
@@ -59,14 +60,18 @@ const StudentsList: React.FC = () => {
     setShowModal(true);
   };
 
+
+
   const handleDelete = async (id: string) => {
     try {
-      await deleteStudent(id);
+      const { message } = await deleteStudent(id);
       setStudentList((prevStudents) =>
         prevStudents.filter((student) => student._id !== id)
       );
+      toast.success(message);
     } catch (error) {
-      console.error("Error deleting student:", error);
+      console.error('Error deleting student:', error);
+      toast.error("Failed to delete student. Please try again later.");
     }
   };
 
